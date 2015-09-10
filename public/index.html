@@ -1,0 +1,56 @@
+<!doctype html>
+<html class="no-js" ng-app="Wakaw">
+    <head>
+        <meta charset="utf-8">
+        <title>Wakaw</title>
+        <base href="/" />
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="bower_components/lumx/dist/lumx.css">
+        <!-- <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700"> -->
+        <link rel="stylesheet" href="styles/main.css">
+        </head>
+        <body>
+            <div ng-controller="MainCtrl" ng-include="layout" style="height: 100%;"></div>
+            <!-- Library Files -->
+            <script src="bower_components/jquery/dist/jquery.js"></script>
+            <script src="bower_components/velocity/velocity.js"></script>
+            <script src="bower_components/moment/min/moment.min.js"></script>
+            <script src="bower_components/angular/angular.min.js"></script>
+            <script src="bower_components/angular-route/angular-route.min.js"></script>
+            <script src="bower_components/lumx/dist/lumx.js"></script>
+            <script src="bower_components/angular-moment/angular-moment.min.js"></script>
+            
+            <!-- Scripts -->
+
+            <script src="scripts/app.js"></script>
+            <script src="scripts/MainCtrl.js"></script>
+            <script src="scripts/HomeCtrl.js"></script>
+            <script src="scripts/NewsCtrl.js"></script>
+            <script src="scripts/AskCtrl.js"></script>
+            <script src="scripts/SubmissionCtrl.js"></script>
+            <script src="scripts/LoginCtrl.js"></script>
+
+            <!-- Templates -->
+            <script type="text/ng-template" id="posts.html">
+                <div flex-item="1" class="posts">
+                <div class="arrow">
+                    <i class="mdi mdi-menu-up"></i>
+                    <span class="fs-body-1">{{item.points}}</span>
+                </div>
+                <div style="margin-left: 40px;">
+                    <div class="title"><a href="#">{{item.title}}</a></div>
+                    <ng-include src="'info.html'"></ng-include>
+                </div>              
+                </div>
+            </script>
+            <script type="text/ng-template" id="info.html">
+                <div class="info">
+                    <span>posted by {{item.by}} <span am-time-ago="item.time"></span> | {{item.comments.length}} comments</span>
+                </div>
+            </script>
+            <ng-include src="'views/popup/login.html'"></ng-include>
+            <ng-include src="'views/popup/submission.html'"></ng-include>
+
+        </body>
+    </html>

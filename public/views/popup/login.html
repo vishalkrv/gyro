@@ -1,0 +1,36 @@
+<lx-dialog class="dialog loginBox" id="login" auto-close="false" ng-controller="LoginCtrl">
+<div class="dialog__header">
+    <div class="toolbar bgc-light-blue-500 pl++">
+        <span class="toolbar__label tc-white fs-title">
+        Welcome
+        </span>
+        <div class="toolbar__right">
+            <button class="btn btn--l btn--white btn--icon" lx-ripple ng-click="dialogClose()">
+            <i class="mdi mdi-close"></i>
+            </button>
+        </div>
+    </div>
+</div>
+<div class="dialog__content">
+    <div class="mt++ p++ pt0" flex-container="row">
+        <div flex-item>
+            <form name="loginFrm" ng-init="newUser = false">
+                <lx-text-field label="Email address" fixed-label="true" icon="email">
+                <input type="email" ng-model="textFields.email">
+                </lx-text-field>
+                <lx-text-field label="Password" fixed-label="true" icon="key">
+                <input type="password" ng-model="textFields.password">
+                </lx-text-field>
+                <lx-text-field label="Retype Password" ng-if="newUser" fixed-label="true" icon="key-change">
+                <input type="password" ng-model="textFields.repassword">
+                </lx-text-field>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="dialog__actions">
+    <span class="toolbar__left" ng-if="errMsg != ''">{{errMsg}}</span>
+    <span class="fs-body-2 display-block toolbar__left" ng-click=" newUser = !newUser">{{newUser == false && 'New User ?' || 'Already a User ?'}}</span>
+    <button class="btn btn--m btn--black btn--flat" lx-ripple ng-click="dialogLogin()">Let me In</button>
+</div>
+</lx-dialog>

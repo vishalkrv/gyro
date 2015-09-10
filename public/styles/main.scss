@@ -1,0 +1,90 @@
+$fontColor: #fff;
+$headerColor: #4792C5;
+$postTitleColor: #000;
+$postInfoColor: #B5B5B5;
+$iconHoverColor: #4CAF50;
+$postsBackGroundColor: #fff;
+html, body {
+    height: 100%;
+}
+header {
+    background-color: $headerColor;
+    color: $fontColor;
+    display: flex;
+}
+.posts {
+    background-color: $postsBackGroundColor;
+    border-radius: 4px;
+    margin: 8px 15px;
+    padding: 15px;
+    position: relative;
+    .title a {
+        color: $postTitleColor;
+        text-decoration: none;
+        font-weight: 600;
+   }   
+ .arrow {
+     position: absolute;
+     left: 0px;
+     top: 0px;
+     width: 53px;
+     i {
+         font-size: 55px;
+         float: left;
+         height: 40px;
+         &:hover {
+             color: $iconHoverColor;
+             cursor: pointer;
+        }
+   }
+   span {
+       position: relative;
+       font-weight: 600;
+       text-align: center;
+       width: 100%;
+       display: block;
+       float: left;
+  }
+}
+}
+@media screen and (min-width: 1024px) {
+    .loginBox {
+        width: 35%;
+        margin-left: -20%   ;
+   }
+}
+@media screen and (max-width: 1023px) {
+    .loginBox {
+        width: 60%;
+        margin-left: -30%;
+   }
+}
+.info {
+       font-size: 10px;
+       text-transform: uppercase;
+       color: $postInfoColor;
+       a {
+           text-decoration: none;
+           color: $postInfoColor;
+      }
+ }
+.comments{
+  .text{
+    width: 39%;
+    margin: 7px auto;
+    background-color: #fff;
+    border-radius: 4px;
+    min-height: 110px;
+    padding: 13px 13px 0px 13px;
+    float: left;
+    font-size: 0.75em;
+    textarea{
+        width: 100%;
+        border-radius: 5px;
+        height: 64px;
+        resize: none;
+        border-color: #E8E8E8;
+        outline: none;
+    }
+  }
+}

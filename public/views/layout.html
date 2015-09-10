@@ -1,0 +1,27 @@
+<div style="position: absolute;width: 100%;z-index: 1;">
+    <header>
+        <div class="toolbar__left">
+            <button class="btn btn--l btn--black btn--icon" lx-ripple>
+            <i class="mdi mdi-biohazard"></i>
+            </button>
+        </div>
+        <span class="toolbar__label fs-title">Title</span>
+        <div class="toolbar__right">
+            <lx-search-filter closed theme="light" model="searchText" ng-keyup="findFilter($event, searchText)"></lx-search-filter>                        
+        </div>
+    </header>
+</div>
+<div class="fab" style="position: absolute;right: 30px;bottom: 22px;">
+        <button class="fab__primary btn btn--xl btn--fab" ng-class="{'btn--green':userStatus.isLoggedIn == true, 'btn--red': userStatus.isLoggedIn == false }"lx-ripple lx-tooltip="{{!userStatus.isLoggedIn && 'Join in'|| userStatus.userDetails.userName}}" tooltip-position="top">
+            <i class="mdi mdi-android"></i>
+            <i class="mdi mdi-plus"></i>
+        </button>
+        <div class="fab__actions fab__actions--left">
+            <button class="btn btn--l btn--black btn--fab" ng-if ="!userStatus.isLoggedIn" lx-ripple ng-click="openDialog('login')" lx-tooltip="Login" tooltip-position="top"><i class="mdi mdi-login"></i></button>           
+            <button class="btn btn--l btn--black btn--fab" ng-if ="userStatus.isLoggedIn" lx-ripple ng-click="logout()" lx-tooltip="Logout" tooltip-position="top"><i class="mdi mdi-logout"></i></button>
+            <button class="btn btn--l btn--black btn--fab" ng-if ="userStatus.isLoggedIn" lx-ripple lx-tooltip="My Posts" tooltip-position="top"><i class="mdi mdi-package"></i></button>
+            <button class="btn btn--l btn--black btn--fab" ng-if ="userStatus.isLoggedIn" lx-ripple ng-click="openDialog('submitPost')" lx-tooltip="Submit Post" tooltip-position="top"><i class="mdi mdi-pencil"></i></button>
+        </div>
+    </div>
+<div class="main" style="height: 100%;" ng-view>
+</div>
