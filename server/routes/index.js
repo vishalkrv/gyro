@@ -1,6 +1,10 @@
 'use strict';
 
 var express = require('express');
+var config = require('../config');
+var Schema = require(config.modelPath()+'schema');
+var PostModel = require(config.modelPath()+'post');
+
 module.exports = function(passport) {
     var router = express.Router();
     router.post('/login', function(req, res, next) {
@@ -39,14 +43,16 @@ module.exports = function(passport) {
             });
         })(req, res, next);
     });
-    router.post('/logout', function(req, res) {
-        res.status(200).send({
-            email: req.body.email,
-            success: true
-        });
+    router.get('/logout', function(req, res) {
+        req.logout();
+        res.status(200).send('Hello');
     });
-    router.post('/submit', function(req, res) {
-        res.status(200).send(req.body);
+    router.post('/submit', function(req, res) {       
+         if(req.body){
+        PostModel.create(Schema.Posts, req, res);
+        }else{
+        res.status(200).send('Error With the JSON Object');
+        }
     });
     router.post('/homeList', function(req, res) {
         if(req.body.type){            

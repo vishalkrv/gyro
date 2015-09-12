@@ -1,7 +1,7 @@
 'use strict';
 var LocalStrategy = require('passport-local').Strategy;
 var config = require('../config');
-var Schema = require(config.schemaPath());
+var Schema = require(config.modelPath()+'schema');
 
 module.exports = function(passport) {
 
@@ -9,14 +9,14 @@ module.exports = function(passport) {
 	passport.serializeUser(function(user, done) {
 		done(null, {
 			_id:user.id,
-			name:user.userName,
+			userName:user.userName,
 			email:user.email
 		});
 	});
 
 
-	passport.deserializeUser(function(obj, done) {
-		Schema.User.findById(id, function(err, user) {
+	passport.deserializeUser(function(obj, done) {		
+		Schema.User.findById(obj.id, function(err, user) {
 			done(err, user);
 		});
 	});

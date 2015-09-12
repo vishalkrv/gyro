@@ -17,7 +17,7 @@ module.exports = config = {
 	routesPath: function(){
 		return path.join(this.serverPath(),'/routes');
 	},
-	schemaPath:function(){
-		return path.join(this.serverPath(),'/model/schema');
+	modelPath:function(){
+		return path.join(this.serverPath(),'/model/');
 	}	
 };

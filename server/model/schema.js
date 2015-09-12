@@ -6,12 +6,8 @@ var config = require('../config');
 mongoose.connect(config.db_url);
 
 var userSchema = new mongoose.Schema({
-	userName:{
-		type:String
-	},
-	password:{
-		type:String
-	},
+	userName:String,
+	password:String,
 	email:{
 		type:String,
 		index:{
@@ -28,6 +24,30 @@ var userSchema = new mongoose.Schema({
 	}
 });
 
+var postSchema = new mongoose.Schema({
+	title:String,
+	type:String,
+	link:String,
+	description:String,
+	tags:[],
+	comments:[],
+	points:{
+		type:Number,
+		default: 0
+	},
+	by:String,
+	time:{
+		type:Date,
+		default:Date.now
+	},
+	slug:{
+		type:String,
+		index:{
+			unique:true
+		}
+	}
+});
+
 userSchema.methods.generateHash = function(password){
 	return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
@@ -41,8 +61,10 @@ userSchema.methods.generateUsername = function(email){
 };
 
 var User = mongoose.model('User', userSchema);
+var Posts = mongoose.model('Posts', postSchema);
 
 module.exports = {
-	User:User
+	User:User,
+	Posts:Posts
 };
 

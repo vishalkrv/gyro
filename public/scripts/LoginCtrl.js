@@ -20,8 +20,8 @@ angular.module('Wakaw').controller('LoginCtrl', ['$scope', 'LxDialogService','Lo
     $scope.dialogLogin = function() {
         var login = responseService.postData('signup',this.textFields);
         login.then(function(response){
-            if(response.success){
-                LoginService.setLoggedIn(response.userDetails.name, response.email);
+            if(response._id){
+                LoginService.setLoggedIn(response.userName, response.email);
                 $scope.dialogClose();
             }else{
                 LxNotificationService.error(response.message);

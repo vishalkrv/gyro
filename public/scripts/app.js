@@ -33,7 +33,7 @@ angular.module('Wakaw', ['ngRoute', 'lumx', 'angularMoment']).config(function($r
             return $http.post(self.path + url, angular.toJson(postData)).then(self.successCb, self.errorCb);
         }
     };
-}]).factory('LoginService', ['$rootScope', function($rootScope) {
+}]).factory('LoginService', ['$rootScope','responseService', function($rootScope,responseService) {
     var loginDetails = {
         isLoggedIn: false,
         userDetails: {
@@ -66,6 +66,12 @@ angular.module('Wakaw', ['ngRoute', 'lumx', 'angularMoment']).config(function($r
         return loginDetails.userDetails;
     };
     this.logoutUser = function() {
+        var promise = responseService.getData('logout');
+        promise.then(function(response){
+            if(response){
+                console.log(response);
+            }
+        });
         this.reset();
         $rootScope.$broadcast('isLoggedIn', loginDetails);
     };
