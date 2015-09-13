@@ -1,5 +1,6 @@
 'use strict';
-angular.module('Wakaw', ['ngRoute', 'lumx', 'angularMoment']).config(function($routeProvider) {
+
+angular.module('Wakaw', ['ngRoute', 'lumx', 'angularMoment','ngCookies']).config(function($routeProvider) {
     $routeProvider.when('/', {
         templateUrl: 'views/home.html',
         controller: 'HomeCtrl'
@@ -33,9 +34,9 @@ angular.module('Wakaw', ['ngRoute', 'lumx', 'angularMoment']).config(function($r
             return $http.post(self.path + url, angular.toJson(postData)).then(self.successCb, self.errorCb);
         }
     };
-}]).factory('LoginService', ['$rootScope','responseService', function($rootScope,responseService) {
+}]).factory('LoginService', ['$rootScope','responseService','$cookieStore', function($rootScope,responseService,$cookieStore) {
     var loginDetails = {
-        isLoggedIn: false,
+        isLogged: false,
         userDetails: {
             userName: '',
             email: ''
@@ -43,7 +44,7 @@ angular.module('Wakaw', ['ngRoute', 'lumx', 'angularMoment']).config(function($r
     };
     this.reset = function() {
         loginDetails = {
-            isLoggedIn: false,
+            isLogged: false,
             userDetails: {
                 userName: '',
                 email: ''
@@ -51,29 +52,48 @@ angular.module('Wakaw', ['ngRoute', 'lumx', 'angularMoment']).config(function($r
         };
     };
     this.setLoggedIn = function(name, email) {
-        loginDetails.isLoggedIn = true;
+        loginDetails.isLogged = true;
         this.setUserDetails(name, email);
-        $rootScope.$broadcast('isLoggedIn', loginDetails);
+        $rootScope.$broadcast('isLogged', loginDetails);
     };
     this.setUserDetails = function(name, email) {
         loginDetails.userDetails.userName = name;
         loginDetails.userDetails.email = email;
     };
     this.getState = function() {
-        return loginDetails.isLoggedIn;
+        return loginDetails.isLogged;
     };
     this.getUserDetails = function() {
         return loginDetails.userDetails;
+    };
+    this.getUserInfo = function(){
+        var promise = responseService.getData('user'),
+            self = this;
+        promise.then(function(response){
+            if(response.userName){
+                self.setLoggedIn(response.userName,response.email);
+           }else{
+            console.error(response);
+            }
+        });
     };
     this.logoutUser = function() {
         var promise = responseService.getData('logout');
         promise.then(function(response){
             if(response){
-                console.log(response);
+                $cookieStore.remove('Gyro_isLogged');
             }
         });
         this.reset();
-        $rootScope.$broadcast('isLoggedIn', loginDetails);
+        $rootScope.$broadcast('isLogged', loginDetails);
     };
     return this;
 }]);
+
+angular.module('Wakaw').run(['$cookieStore','LoginService',function($cookieStore,LoginService){
+    var isLogged = $cookieStore.get('Gyro_isLogged');
+    if(isLogged){
+        LoginService.getUserInfo();
+    }
+}]);
+

@@ -14,23 +14,23 @@
 <div class="dialog__content">
     <div class="mt++ p++ pt0" flex-container="row">
         <div flex-item>
-            <form name="loginFrm" ng-init="newUser = false">
+            <form name="loginFrm">
                 <lx-text-field label="Email address" fixed-label="true" icon="email">
                 <input type="email" ng-model="textFields.email">
                 </lx-text-field>
                 <lx-text-field label="Password" fixed-label="true" icon="key">
                 <input type="password" ng-model="textFields.password">
                 </lx-text-field>
-                <lx-text-field label="Retype Password" ng-if="newUser" fixed-label="true" icon="key-change">
-                <input type="password" ng-model="textFields.repassword">
-                </lx-text-field>
+                <div class="checkbox" style="margin: 22px 0px;padding-left: 7px;">
+                    <input type="checkbox" id="checkbox1" ng-model="newUser" class="checkbox__input">
+                    <label for="checkbox1" class="checkbox__label">New User ?</label>
+                </div>
             </form>
         </div>
     </div>
 </div>
 <div class="dialog__actions">
     <span class="toolbar__left" ng-if="errMsg != ''">{{errMsg}}</span>
-    <span class="fs-body-2 display-block toolbar__left" ng-click=" newUser = !newUser">{{newUser == false && 'New User ?' || 'Already a User ?'}}</span>
     <button class="btn btn--m btn--black btn--flat" lx-ripple ng-click="dialogLogin()">Let me In</button>
 </div>
 </lx-dialog>

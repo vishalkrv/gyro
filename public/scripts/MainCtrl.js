@@ -3,10 +3,10 @@ angular.module('Wakaw').controller('MainCtrl', ['$scope', '$route', 'LxDialogSer
     function($scope, $route, LxDialogService,$rootScope,LoginService) {
 
         $scope.userStatus = {
-            isLoggedIn:false
+            isLogged:false
         };
 
-        $rootScope.$on('isLoggedIn', function(event, data){
+        $rootScope.$on('isLogged', function(event, data){
             $scope.userStatus = data;
         });
 

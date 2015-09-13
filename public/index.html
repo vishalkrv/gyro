@@ -17,6 +17,7 @@
             <script src="bower_components/velocity/velocity.js"></script>
             <script src="bower_components/moment/min/moment.min.js"></script>
             <script src="bower_components/angular/angular.min.js"></script>
+            <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
             <script src="bower_components/angular-route/angular-route.min.js"></script>
             <script src="bower_components/lumx/dist/lumx.js"></script>
             <script src="bower_components/angular-moment/angular-moment.min.js"></script>
@@ -39,7 +40,7 @@
                     <span class="fs-body-1">{{item.points}}</span>
                 </div>
                 <div style="margin-left: 40px;">
-                    <div class="title"><a href="#">{{item.title}}</a></div>
+                    <div class="title"><a ng-href="{{item.link}}">{{item.title}}</a></div>
                     <ng-include src="'info.html'"></ng-include>
                 </div>              
                 </div>

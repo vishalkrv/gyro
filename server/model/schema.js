@@ -1,9 +1,6 @@
 'use strict';
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
-var config = require('../config');
-
-mongoose.connect(config.db_url);
 
 var userSchema = new mongoose.Schema({
 	userName:String,

@@ -6,12 +6,17 @@ var cookieParser = require('cookie-parser');
 var passport = require('passport');
 var config = require('./config');
 var session = require('express-session');
+var StoreSession = require('connect-mongo')(session);
+var mongoose = require('mongoose');
+//Connect to DB
+mongoose.connect(config.db_url);
 // Passport does not directly manage your session, it only uses the session.
 // So you configure session attributes (e.g. life of your session) via express
 var sessionOpts = {
   saveUninitialized: true, // saved new sessions
+  store:new StoreSession({mongooseConnection:mongoose.connection}),
   resave: false, // do not automatically write to the session store
-  name: 'wakaw_', 
+  name: config.cookieName, 
   secret: config.secretKey,
   cookie : { httpOnly: true, maxAge: 2419200000 } // configure when sessions expires
 };

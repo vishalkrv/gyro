@@ -7,6 +7,7 @@ module.exports = config = {
 	host: '127.0.0.1',
 	db_url: 'mongodb://127.0.0.1:27017/expressAngular',
 	secretKey:'thatsmyApp',
+	cookieName:'Gyro_',
 	root: path.normalize(path.join(__dirname, '../..')),
 	serverPath: function(){
 		return path.join(this.root,'/server');
