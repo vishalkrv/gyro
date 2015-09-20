@@ -4,16 +4,18 @@ angular.module('Wakaw', ['ngRoute', 'lumx', 'angularMoment','ngCookies']).config
     $routeProvider.when('/', {
         templateUrl: 'views/home.html',
         controller: 'HomeCtrl'
-    }).when('/news/:id', {
+    }).when('/news/:slug', {
         templateUrl: 'views/post.html',
         controller: 'NewsCtrl'
-    }).when('/ask/:id', {
+    }).when('/ask/:slug', {
         templateUrl: 'views/post.html',
         controller: 'AskCtrl'
+    }).when('/submitTag', {
+        templateUrl: 'views/tags.html',
+        controller: 'TagCtrl'
     }).otherwise({
         redirectTo: '/'
     });
-    //$locationProvider.html5Mode(true);
 }).factory('responseService', ['$http', 'LxNotificationService', function($http, LxNotificationService) {
     return {
         path: '/api/v1/',

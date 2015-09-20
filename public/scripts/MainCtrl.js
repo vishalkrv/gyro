@@ -1,6 +1,6 @@
 'use strict';
-angular.module('Wakaw').controller('MainCtrl', ['$scope', '$route', 'LxDialogService','$rootScope','LoginService',
-    function($scope, $route, LxDialogService,$rootScope,LoginService) {
+angular.module('Wakaw').controller('MainCtrl', ['$scope', '$route', 'responseService', 'LxDialogService','$rootScope','LoginService','$location',
+    function($scope, $route, responseService, LxDialogService,$rootScope,LoginService, $location) {
 
         $scope.userStatus = {
             isLogged:false
@@ -9,6 +9,17 @@ angular.module('Wakaw').controller('MainCtrl', ['$scope', '$route', 'LxDialogSer
         $rootScope.$on('isLogged', function(event, data){
             $scope.userStatus = data;
         });
+
+        $scope.updatePoints = function(id){
+            var promise = responseService.postData('updatePoints',{_id:id});
+            promise.then(function(response){
+                console.log(response);
+            }); 
+        };
+
+        $scope.redirect = function(slug, type){
+            $location.url(type+'/'+slug);
+        };       
 
         $scope.layout = 'views/layout.html';
 

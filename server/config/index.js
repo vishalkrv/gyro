@@ -5,7 +5,7 @@ var config ={};
 module.exports = config = {
 	port: 8080,
 	host: '127.0.0.1',
-	db_url: 'mongodb://127.0.0.1:27017/expressAngular',
+	db_url: 'mongodb://127.0.0.1:27017/GyroDB',
 	secretKey:'thatsmyApp',
 	cookieName:'Gyro_',
 	root: path.normalize(path.join(__dirname, '../..')),
@@ -20,5 +20,10 @@ module.exports = config = {
 	},
 	modelPath:function(){
 		return path.join(this.serverPath(),'/model/');
+	},
+	utils:{
+		isEmpty:function(obj){
+			return !Object.keys(obj).length > 0;
+		}
 	}	
 };

@@ -31,23 +31,24 @@
             <script src="scripts/AskCtrl.js"></script>
             <script src="scripts/SubmissionCtrl.js"></script>
             <script src="scripts/LoginCtrl.js"></script>
+            <script src="scripts/TagCtrl.js"></script>
 
             <!-- Templates -->
-            <script type="text/ng-template" id="posts.html">
+            <script type="text/ng-template" id="posts.html">               
                 <div flex-item="1" class="posts">
                 <div class="arrow">
-                    <i class="mdi mdi-menu-up"></i>
+                    <i class="mdi mdi-menu-up" ng-click="updatePoints(item._id)"></i>
                     <span class="fs-body-1">{{item.points}}</span>
                 </div>
                 <div style="margin-left: 40px;">
-                    <div class="title"><a ng-href="{{item.link}}">{{item.title}}</a></div>
+                    <div class="title"><a ng-href="{{(item.type=='news')?item.link:'#/ask/'+item.slug}}">{{item.title}}</a></div>
                     <ng-include src="'info.html'"></ng-include>
                 </div>              
                 </div>
             </script>
             <script type="text/ng-template" id="info.html">
                 <div class="info">
-                    <span>posted by {{item.by}} <span am-time-ago="item.time"></span> | {{item.comments.length}} comments</span>
+                    <span>posted by {{item._by.userName}} <span am-time-ago="item.time"></span> | <span style="cursor:pointer"ng-click="redirect(item.slug, item.type)">{{item._comments.length}} comments</span></span>
                 </div>
             </script>
             <ng-include src="'views/popup/login.html'"></ng-include>

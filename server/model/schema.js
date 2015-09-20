@@ -1,8 +1,9 @@
 'use strict';
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt-nodejs');
 
-var userSchema = new mongoose.Schema({
+var userSchema = Schema({
 	userName:String,
 	password:String,
 	email:{
@@ -21,18 +22,41 @@ var userSchema = new mongoose.Schema({
 	}
 });
 
-var postSchema = new mongoose.Schema({
+var tagSchema = Schema({
+	name:{
+		type:String,
+		index:{
+			unique:true
+		}
+	},
+	createdOn:{
+		type:Date,
+		default:Date.now()
+	}
+});
+
+
+var commentSchema = Schema({	
+	_by:{type:Schema.Types.ObjectId, ref:'User'},
+	time:{
+		type:Date,
+		default:Date.now
+	},
+	text:String
+});
+
+var postSchema = Schema({
 	title:String,
 	type:String,
 	link:String,
 	description:String,
-	tags:[],
-	comments:[],
+	_tags:[{type:Schema.Types.ObjectId, ref:'Tag'}],
+	_comments:[commentSchema],
 	points:{
 		type:Number,
 		default: 0
 	},
-	by:String,
+	_by:{type:Schema.Types.ObjectId, ref:'User'},
 	time:{
 		type:Date,
 		default:Date.now
@@ -58,10 +82,12 @@ userSchema.methods.generateUsername = function(email){
 };
 
 var User = mongoose.model('User', userSchema);
-var Posts = mongoose.model('Posts', postSchema);
-
+var Post = mongoose.model('Post', postSchema);
+var Tag = mongoose.model('Tag', tagSchema);
+var Comment = mongoose.model('Comment', commentSchema);
 module.exports = {
 	User:User,
-	Posts:Posts
+	Post:Post,
+	Tag:Tag
 };
 

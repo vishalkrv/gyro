@@ -1,6 +1,7 @@
 'use strict';
 angular.module('Wakaw').controller('submissionCtrl', ['$scope', 'LxDialogService','responseService', function($scope, LxDialogService, responseService) {
     $scope.init = function() {
+        loadTag();
         if (this.textFields) {
             for (var i in this.textFields) {
                 delete this.textFields[i];
@@ -21,20 +22,12 @@ angular.module('Wakaw').controller('submissionCtrl', ['$scope', 'LxDialogService
         });
         this.dialogClose();
     };
-    $scope.selectSections = {
-        '<i class="mdi mdi-android"></i>List': [{
-            uid: '5',
-            name: 'CSS'
-        }, {
-            uid: '6',
-            name: 'JAVASCRIPT'
-        }, {
-            uid: '7',
-            name: 'HTML'
-        }, {
-            uid: '8',
-            name: 'JAVA'
-        }]
-    };
+
+    function loadTag (){
+        var data = responseService.getData('listTag');
+        data.then(function(response){
+            $scope.selectSections = response;
+        });
+    }
     $scope.init();
-}])
+}]);

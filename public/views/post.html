@@ -12,8 +12,8 @@
 
 	<div flex-container="row"class="comments">
 		<div class="text">			
-			<textarea> Hello World</textarea>
-			<button class="btn btn--l btn--black btn--icon" lx-ripple style="float: right;margin-top:-8px;">
+			<textarea ng-model="commentText"> Hello World</textarea>
+			<button class="btn btn--l btn--black btn--icon" ng-click="reply()" lx-ripple style="float: right;margin-top:-8px;">
             <i class="mdi mdi-reply"></i>
             </button>		
 		</div>

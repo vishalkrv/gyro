@@ -22,7 +22,7 @@
                 <input type="password" ng-model="textFields.password">
                 </lx-text-field>
                 <div class="checkbox" style="margin: 22px 0px;padding-left: 7px;">
-                    <input type="checkbox" id="checkbox1" ng-model="newUser" class="checkbox__input">
+                    <input type="checkbox" id="checkbox1" ng-model="textFields.newUser" ng-init="textFields.newUser = false"class="checkbox__input">
                     <label for="checkbox1" class="checkbox__label">New User ?</label>
                 </div>
             </form>
