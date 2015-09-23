@@ -1,8 +1,20 @@
 'use strict';
 
-
 var opts = [{path:'_by',select:'userName'},
-					{path:'_tags',select:'name'}];
+					{path:'_tags',select:'name'},{path:'_comments._by', select:'userName'}];
+
+function toData(body, Model, userData) {	
+	return new Model({
+	title:body.title,
+	type:body.type,
+	link:body.link,
+	description:body.description,
+	_tags:body.tags,
+	_by:userData.user._id,
+	slug:body.title.replace(/^\s+|\s+$/g,'').toLowerCase().replace(/[^a-z0-9]/g,'').replace(/\s+/g,'-').replace(/-+/g,'-')
+	});
+}
+
 
 					
 exports.create = function(model, request, response){
@@ -138,17 +150,36 @@ exports.listAll = function(model, request, response){
 	});
 };
 
-exports.listByType = function(model, request, response){
-	model.find({}, function(err, result){
-		if(err){
-			response.status(200).send('Error Fetching List');
-		}
-		if(response !== null){
-			response.status(200).send(JSON.stringify(result));
-		}else{
-			response.status(501).send('Server Error');
-		}
-	});
+exports.listByType = function(model, request, response){	
+	if(request.body.orderBy === 'Latest'){
+		model.find({type:request.body.type},{},{sort:{'time':-1}}, function(err, data){
+				if(!err){
+					model.populate(data, [{path:'_by', select:'userName'}], function(err, result){
+						if(!err){
+							response.status(200).send(result);
+						}else{
+							response.status(500).send(err);
+						}
+					});					
+				}else{
+					response.status(500).send(err);
+				}
+			});
+	}else{
+		model.find({type:request.body.type},{},{sort:{'time':1}}, function(err, data){
+				if(!err){
+					model.populate(data, [{path:'_by', select:'userName'}], function(err, result){
+						if(!err){
+							response.status(200).send(result);
+						}else{
+							response.status(500).send(err);
+						}
+					});	
+				}else{
+					response.status(500).send(err);
+				}
+			});
+	}
 };
 
 exports.postComment = function(Model, request, response){	
@@ -165,23 +196,15 @@ exports.postComment = function(Model, request, response){
 		new: true
 	}, function(err, data) {
 		if (!err) {
-			console.log(data);
-			response.send(data);
+			Model.populate(data, opts,function(err, result){
+				if(!err){
+					response.status(200).send(result);
+				}else{
+					response.status(500).send(err);
+				}
+			});
 		} else {
 			response.status(500).send(err);
 		}
 	});	
 };
-
-
-function toData(body, Model, userData) {	
-	return new Model({
-	title:body.title,
-	type:body.type,
-	link:body.link,
-	description:body.description,
-	_tags:body.tags,
-	_by:userData.user._id,
-	slug:body.title.replace(/^\s+|\s+$/g,'').toLowerCase().replace(/[^a-z0-9]/g,'').replace(/\s+/g,'-').replace(/-+/g,'-')
-	});
-}

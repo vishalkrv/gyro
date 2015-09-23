@@ -90,7 +90,7 @@ module.exports = function(passport) {
     });
     router.post('/homeList', function(req, res) {        
         if (req.body.type) {
-            PostModel.listByType(Schema.Post, req, res); {}
+            PostModel.listByType(Schema.Post, req, res);
         }
         if (config.utils.isEmpty(req.body)) {
             PostModel.listAll(Schema.Post, req, res);

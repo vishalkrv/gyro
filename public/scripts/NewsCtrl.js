@@ -19,7 +19,9 @@ angular.module('Wakaw').controller('NewsCtrl',['$scope','$routeParams','response
 		});
 
 		promise.then(function(response){
-			console.log(response);
+			$scope.item = response;
+			$scope.commentText = '';
+
 		});
 	};
 

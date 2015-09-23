@@ -2,13 +2,13 @@
 <html class="no-js" ng-app="Wakaw">
     <head>
         <meta charset="utf-8">
-        <title>Wakaw</title>
+        <title>Gyro</title>
         <base href="/" />
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
-        <link rel="stylesheet" href="bower_components/lumx/dist/lumx.css">
         <!-- <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700"> -->
-        <link rel="stylesheet" href="styles/main.css">
+        <link rel="stylesheet" href="bower_components/mdi/css/materialdesignicons.css">
+        <link rel="stylesheet" href="styles/main.min.css">
         </head>
         <body>
             <div ng-controller="MainCtrl" ng-include="layout" style="height: 100%;"></div>
@@ -36,7 +36,7 @@
             <!-- Templates -->
             <script type="text/ng-template" id="posts.html">               
                 <div flex-item="1" class="posts">
-                <div class="arrow">
+                <div class="arrow spclColor">
                     <i class="mdi mdi-menu-up" ng-click="updatePoints(item._id)"></i>
                     <span class="fs-body-1">{{item.points}}</span>
                 </div>
@@ -48,7 +48,7 @@
             </script>
             <script type="text/ng-template" id="info.html">
                 <div class="info">
-                    <span>posted by {{item._by.userName}} <span am-time-ago="item.time"></span> | <span style="cursor:pointer"ng-click="redirect(item.slug, item.type)">{{item._comments.length}} comments</span></span>
+                    <span>posted by {{item._by.userName}} <span am-time-ago="item.time"></span> | <span style="cursor:pointer" class="spclColor"ng-click="redirect(item.slug, item.type)">{{item._comments.length}} comments</span></span>
                 </div>
             </script>
             <ng-include src="'views/popup/login.html'"></ng-include>

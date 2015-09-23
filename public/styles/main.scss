@@ -1,9 +1,36 @@
-$fontColor: #fff;
-$headerColor: #4792C5;
-$postTitleColor: #000;
+$fontColor: yellow;
+$headerColor: #0F2235;
+$postTitleColor: #fff;
 $postInfoColor: #B5B5B5;
 $iconHoverColor: #4CAF50;
-$postsBackGroundColor: #fff;
+$postsBackGroundColor: #ffffff;
+$spclColor: #3BD1A9;
+//=======SETTINGS====//
+$base-text-color:       #696D73         !default;
+$base-background-color: #15141b       !default;
+//==================//
+
+//@import 'settings';
+@import "../bower_components/lumx/dist/scss/lumx";
+
+//FONT
+@font-face {
+  font-family: 'LeagueGothic';
+  font-style: normal;
+  font-weight: normal;
+  src: url('../font/League-Gothic/LeagueGothic-Regular.otf') format('opentype');
+}
+
+//ICONS COLOR
+i.mdi{
+  color: #ececec;
+}
+
+//SEARCH FILTER TEXT COLOR
+.search-filter--light-theme .search-filter__input{
+  color: #ececec;
+}
+
 html, body {
     height: 100%;
 }
@@ -12,9 +39,14 @@ header {
     color: $fontColor;
     display: flex;
 }
+
+.fs-title{
+  font-family: 'LeagueGothic';
+  font-size: 33px;
+}
 .posts {
-    background-color: $postsBackGroundColor;
-    border-radius: 4px;
+    //background-color: $postsBackGroundColor;
+    border-bottom: 1px solid #24232A;
     margin: 8px 15px;
     padding: 15px;
     position: relative;
@@ -62,17 +94,16 @@ header {
 .info {
        font-size: 10px;
        text-transform: uppercase;
-       color: $postInfoColor;
+      // color: $postInfoColor;
        a {
            text-decoration: none;
-           color: $postInfoColor;
+          // color: $postInfoColor;
       }
  }
 .comments{
   .text{
     width: 39%;
     margin: 7px auto;
-    background-color: #fff;
     border-radius: 4px;
     min-height: 110px;
     padding: 13px 13px 0px 13px;
@@ -87,4 +118,8 @@ header {
         outline: none;
     }
   }
+}
+
+.spclColor{
+  color :$spclColor;
 }

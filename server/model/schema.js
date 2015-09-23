@@ -84,7 +84,6 @@ userSchema.methods.generateUsername = function(email){
 var User = mongoose.model('User', userSchema);
 var Post = mongoose.model('Post', postSchema);
 var Tag = mongoose.model('Tag', tagSchema);
-var Comment = mongoose.model('Comment', commentSchema);
 module.exports = {
 	User:User,
 	Post:Post,

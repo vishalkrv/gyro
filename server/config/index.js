@@ -5,7 +5,7 @@ var config ={};
 module.exports = config = {
 	port: 8080,
 	host: '127.0.0.1',
-	db_url: 'mongodb://127.0.0.1:27017/GyroDB',
+	dbUrl: 'mongodb://127.0.0.1:27017/GyroDB',
 	secretKey:'thatsmyApp',
 	cookieName:'Gyro_',
 	root: path.normalize(path.join(__dirname, '../..')),

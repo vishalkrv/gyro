@@ -9,6 +9,20 @@ angular.module('Wakaw').controller('AskCtrl',['$scope','$routeParams','responseS
 				$scope.item = response[0];
 			}
 		});
+		$scope.commentText = '';
+	};
+
+	$scope.reply = function(){
+		var promise = responseService.postData('addComment', {
+			postId:$scope.item._id,
+			commentText:$scope.commentText
+		});
+
+		promise.then(function(response){
+			$scope.item = response;
+			$scope.commentText = '';
+
+		});
 	};
 
 	$scope.init();

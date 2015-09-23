@@ -15,7 +15,6 @@ angular.module('Wakaw').controller('LoginCtrl', ['$scope', 'LxDialogService','Lo
         LxDialogService.close($scope.lxDialogElement[0].id);
     };
     $scope.dialogLogin = function() {
-        var self = this;
         var login = responseService.postData((this.textFields.newUser === true)?'signup':'login',this.textFields);
         login.then(function(response){
             if(response._id){

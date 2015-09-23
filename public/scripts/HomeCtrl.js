@@ -10,7 +10,7 @@ angular.module('Wakaw').controller('HomeCtrl', ['$scope', 'responseService', fun
     	if(type){
     	var promise = responseService.postData('homeList',{type:type,orderBy:orderBy});
         promise.then(function(response) {
-            $scope.homeList[type] = response[type];
+            $scope.homeList[type] = response;
         });
     	}else{
     		var promis = responseService.postData('homeList');
