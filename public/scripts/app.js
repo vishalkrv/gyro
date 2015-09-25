@@ -10,9 +10,6 @@ angular.module('Wakaw', ['ngRoute', 'lumx', 'angularMoment','ngCookies']).config
     }).when('/ask/:slug', {
         templateUrl: 'views/post.html',
         controller: 'AskCtrl'
-    }).when('/submitTag', {
-        templateUrl: 'views/tags.html',
-        controller: 'TagCtrl'
     }).otherwise({
         redirectTo: '/'
     });

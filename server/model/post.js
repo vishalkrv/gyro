@@ -104,7 +104,7 @@ exports.updatePoints = function(model, req, res) {
 			res.status(500).send('Internal Error Occured');
 		}
 		if (!err) {
-			console.log(result);
+			res.status(200).send('Updated');
 		}
 	});
 };
