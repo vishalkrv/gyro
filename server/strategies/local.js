@@ -5,7 +5,6 @@ var Schema = require(config.modelPath()+'schema');
 
 module.exports = function(passport) {
 
-
 	passport.serializeUser(function(user, done) {
 		done(null, {
 			_id:user.id,
@@ -14,9 +13,8 @@ module.exports = function(passport) {
 		});
 	});
 
-
-	passport.deserializeUser(function(obj, done) {		
-		Schema.User.findById(obj.id, function(err, user) {
+	passport.deserializeUser(function(obj, done) {
+		Schema.User.findById(obj._id, function(err, user) {
 			done(err, user);
 		});
 	});
