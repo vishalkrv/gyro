@@ -1,2 +1,2 @@
 # myNodeProject
-New and Questions Combined
+News and Questions Combined
